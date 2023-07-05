@@ -22,7 +22,7 @@ laby = labyrinth.Labyrinth((200, 200, 200))
 for i in range(0, 200):
     x = random.randint(0, 17) * 40
     y = random.randint(0, 17) * 40
-    br = brick.Brick(x, y, (200, 200, 200))    
+    br = brick.Brick(x, y, (200, 200, 200))
     bricks.append(br)
 
 

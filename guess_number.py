@@ -1,11 +1,11 @@
 import random
 
-result = random.randrange(1, 1000)
+result = random.randrange(1, 10)
 win = False
 
 for i in range(1, 10):
     print('попытка номер: ', i)
-    answer = int(input('Угадай число от 1 до 1000: '))
+    answer = int(input('Угадай число от 1 до 10: '))
 
     if answer == result:
         print('Угадал: ', result)

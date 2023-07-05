@@ -1,5 +1,7 @@
 import random
 
-for i in range(10):
-    result = random.randrange(1, 10)
+f = [ '🤣haha', '😢:-( sad', '😍love', '😎cool', '😒boring' ]
+
+for i in range(1000):
+    result = f[random.randrange(0, 4)]
     print(result)
