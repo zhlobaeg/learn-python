@@ -13,7 +13,7 @@ surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
 # TODO: skins
-# TODO: взрыв стен
+# TODO: взрыв игрока
 bomber = player.Player((0, 255, 0), surface)
 bombs = []
 bricks = []
@@ -59,12 +59,25 @@ while running:
 
     laby.draw(surface)
 
+    #TODO: optimaze fors
     for brick in bricks:
         brick.draw(surface)
         if bomber.check_hit(brick):
             bomber.x = player_x
             bomber.y = player_y
 
+    for b in bombs:
+        if bomber.check_hit_bomb(b):
+            bomber.x = player_x
+            bomber.y = player_y
+
+    exploded_bricks = [] 
+    for brick in bricks:
+        for b in bombs:
+            if b.check_hit(brick):
+                exploded_bricks.append(brick)
+    bricks = list(set(bricks) - set(exploded_bricks))
+          
     exploded = []
     for b in bombs:
         if b.tick():

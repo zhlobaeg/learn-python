@@ -30,3 +30,7 @@ class Player:
     def check_hit(self, brick):
         hit = (self.x == brick.x + 20) and (self.y == brick.y + 20)
         return hit
+    
+    def check_hit_bomb(self, bomb):
+        hit = (self.x == bomb.x) and (self.y == bomb.y)
+        return hit
