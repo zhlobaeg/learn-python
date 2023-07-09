@@ -1,4 +1,6 @@
 import pygame
+import tkinter
+from tkinter import messagebox
 import random
 import player
 import bomb
@@ -13,7 +15,6 @@ surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
 # TODO: skins
-# TODO: взрыв игрока
 bomber = player.Player((0, 255, 0), surface)
 bombs = []
 bricks = []
@@ -24,6 +25,9 @@ for i in range(0, 10):
     y = random.randint(0, 17) * 40
     br = brick.Brick(x, y, (200, 200, 200))
     bricks.append(br)
+
+def game_over():
+    tkinter.messagebox.showinfo('GAME OVER','OK')
 
 
 running = True
@@ -38,7 +42,7 @@ while running:
     for event in events:
         if event.type == pygame.QUIT:
             running = False
-            pygame.quit()
+            game_over()
             break
 
         if event.type == pygame.KEYDOWN:
@@ -70,6 +74,10 @@ while running:
         if bomber.check_hit(b):
             bomber.x = player_x
             bomber.y = player_y
+        if b.check_hit(bomber):
+            running = False
+            game_over()
+            break
 
     exploded_bricks = [] 
     for brick in bricks:
@@ -88,3 +96,5 @@ while running:
     bomber.draw()
 
     pygame.display.update()
+
+pygame.quit()
