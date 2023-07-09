@@ -19,7 +19,7 @@ bombs = []
 bricks = []
 laby = labyrinth.Labyrinth((200, 200, 200))
 
-for i in range(0, 200):
+for i in range(0, 10):
     x = random.randint(0, 17) * 40
     y = random.randint(0, 17) * 40
     br = brick.Brick(x, y, (200, 200, 200))
@@ -67,7 +67,7 @@ while running:
             bomber.y = player_y
 
     for b in bombs:
-        if bomber.check_hit_bomb(b):
+        if bomber.check_hit(b):
             bomber.x = player_x
             bomber.y = player_y
 
