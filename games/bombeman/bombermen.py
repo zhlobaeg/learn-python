@@ -6,6 +6,7 @@ import player
 import bomb
 import labyrinth
 import brick
+import skin
 
 FPS = 30
 
@@ -14,17 +15,31 @@ pygame.display.set_caption('Bomberman')
 surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
-# TODO: skins
-bomber = player.Player((0, 255, 0), surface)
+curr_skin = skin.skin_1
+bomber = player.Player(curr_skin.player_color, surface)
 bombs = []
 bricks = []
-laby = labyrinth.Labyrinth((200, 200, 200))
+laby = labyrinth.Labyrinth(curr_skin.brick_color)
 
 for i in range(0, 150):
     x = random.randint(0, 17) * 40
     y = random.randint(0, 17) * 40
-    br = brick.Brick(x, y, (200, 200, 200))
+    br = brick.Brick(x, y, curr_skin.brick_color)
     bricks.append(br)
+
+def change_skin(skin_number):
+    global curr_skin
+    global bricks
+    if skin_number == 1:
+        curr_skin = skin.skin_1
+    elif skin_number == 2:
+        curr_skin = skin.skin_2
+    elif skin_number == 3:
+        curr_skin = skin.skin_3
+    bomber.color = curr_skin.player_color
+    laby.color = curr_skin.brick_color
+    for brick in bricks:
+        brick.color = curr_skin.brick_color
 
 def game_over():
     tkinter.messagebox.showinfo('GAME OVER','OK')
@@ -54,11 +69,17 @@ while running:
             elif event.key == pygame.K_s:
                 bomber.step_down()
             elif event.key == pygame.K_SPACE:
-                b = bomb.Bomb(bomber.x, bomber.y, (127, 127, 127), (225, 0, 0))
+                b = bomb.Bomb(bomber.x, bomber.y, curr_skin.bomb_color, curr_skin.bomb_blast_color)
                 bombs.append(b)
+            elif event.key == pygame.K_1:
+                change_skin(1)
+            elif event.key == pygame.K_2:
+                change_skin(2)
+            elif event.key == pygame.K_3:
+                change_skin(3)
+        
     
-    
-    surface.fill((0, 0, 0))
+    surface.fill(curr_skin.background_color)
 
     laby.draw(surface)
 
