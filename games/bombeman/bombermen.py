@@ -20,7 +20,7 @@ bombs = []
 bricks = []
 laby = labyrinth.Labyrinth((200, 200, 200))
 
-for i in range(0, 10):
+for i in range(0, 150):
     x = random.randint(0, 17) * 40
     y = random.randint(0, 17) * 40
     br = brick.Brick(x, y, (200, 200, 200))
@@ -42,7 +42,6 @@ while running:
     for event in events:
         if event.type == pygame.QUIT:
             running = False
-            game_over()
             break
 
         if event.type == pygame.KEYDOWN:
@@ -63,36 +62,36 @@ while running:
 
     laby.draw(surface)
 
-    #TODO: optimaze fors
+
+    exploded_bricks = [] 
+
     for brick in bricks:
         brick.draw(surface)
         if bomber.check_hit(brick):
             bomber.x = player_x
             bomber.y = player_y
+        for b in bombs:
+            if b.check_hit(brick):
+                exploded_bricks.append(brick)
+    bricks = list(set(bricks) - set(exploded_bricks))
+    
+    exploded_bombs = []
 
     for b in bombs:
+        if b.tick():
+            b.draw(surface)
+        else:
+            exploded_bombs.append(b)
         if bomber.check_hit(b):
             bomber.x = player_x
             bomber.y = player_y
         if b.check_hit(bomber):
             running = False
             game_over()
-            break
-
-    exploded_bricks = [] 
-    for brick in bricks:
-        for b in bombs:
-            if b.check_hit(brick):
-                exploded_bricks.append(brick)
-    bricks = list(set(bricks) - set(exploded_bricks))
-          
-    exploded = []
-    for b in bombs:
-        if b.tick():
-            b.draw(surface)
-        else:
-            exploded.append(b)
-    bombs = list(set(bombs) - set(exploded))
+            break       
+    bombs = list(set(bombs) - set(exploded_bombs))
+    
+    
     bomber.draw()
 
     pygame.display.update()
