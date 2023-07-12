@@ -15,6 +15,8 @@ pygame.display.set_caption('Bomberman')
 surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
+#TODO: звуки
+#TODO: текстуры
 curr_skin = skin.skin_1
 bomber = player.Player(curr_skin.player_color, surface)
 bombs = []
