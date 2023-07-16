@@ -16,9 +16,10 @@ surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
 #TODO: звуки
-#TODO: текстуры
+#TODO: заменить картинки для игрока на png
+#TODO: текстуры для бомб
 curr_skin = skin.skin_1
-bomber = player.Player(curr_skin.player_color, surface)
+bomber = player.Player(curr_skin.name, surface)
 bombs = []
 bricks = []
 laby = labyrinth.Labyrinth(curr_skin.brick_color)
@@ -39,7 +40,7 @@ def change_skin(skin_number):
         curr_skin = skin.skin_2
     elif skin_number == 3:
         curr_skin = skin.skin_3
-    bomber.color = curr_skin.player_color
+    bomber.set_skin(curr_skin.name)
     laby.color = curr_skin.brick_color
     for brick in bricks:
         brick.set_skin(curr_skin.name)
@@ -116,7 +117,7 @@ while running:
     bombs = list(set(bombs) - set(exploded_bombs))
     
     
-    bomber.draw()
+    bomber.draw(surface)
 
     pygame.display.update()
 
