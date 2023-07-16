@@ -26,8 +26,9 @@ laby = labyrinth.Labyrinth(curr_skin.brick_color)
 for i in range(0, 150):
     x = random.randint(0, 17) * 40
     y = random.randint(0, 17) * 40
-    br = brick.Brick(x, y, curr_skin.brick_color)
+    br = brick.Brick(x, y, curr_skin.name)
     bricks.append(br)
+
 
 def change_skin(skin_number):
     global curr_skin
@@ -41,7 +42,7 @@ def change_skin(skin_number):
     bomber.color = curr_skin.player_color
     laby.color = curr_skin.brick_color
     for brick in bricks:
-        brick.color = curr_skin.brick_color
+        brick.set_skin(curr_skin.name)
 
 def game_over():
     tkinter.messagebox.showinfo('GAME OVER','OK')
