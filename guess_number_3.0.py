@@ -9,11 +9,9 @@ kolichestvo = int(input('1 (от 1 до 20) 2 (от 1 до 50) или 3 (от 1 
 
 popitki = 0
 
-win = False
-
 
 if kolichestvo == 1:
-    number = random.randint(1, 50)
+    number = random.randint(1, 10)
     popitki = 6
 
 elif kolichestvo == 2:
@@ -24,69 +22,51 @@ elif kolichestvo == 3:
     number = random.randint(1, 100)
     popitki = 15
 
-
-if rezhim == 1:
-    for i in range(popitki):
-        print('попытка номер', i)
+def get_answer(rezhim):
+    if rezhim == 1:
         ans = int(input('введите 1 число: '))
         print('                 +')
         ans_2 = int(input('введите 2 число: '))
-        otvet = ans + ans_2   
-        if otvet == number:
-            win = True
-            break
-        elif otvet < number:
-            print('число больше')
-        else:
-            print('число меньше')
-
-    if win:
-        print('вы выйграли')
-        print('правильный ответ: ', number)
-    else:
-        print('вы проиграли')
-        print('правильный ответ: ', number)
-
-elif rezhim == 2:
-    for i in range(popitki):
-        print('попытка номер', i)
+        otvet = ans + ans_2
+        return otvet
+    elif rezhim == 2:
         ans = int(input('введите 1 число: '))
         print('                 -')
         ans_2 = int(input('введите 2 число: '))
-        otvet = ans - ans_2   
-        if otvet == number:
-            win = True
-            break
-        elif otvet < number:
-            print('число больше')
-        else:
-            print('число меньше')
+        otvet = ans - ans_2
+        return otvet
+    elif rezhim == 3:
+        ans = int(input('введите число: '))
+        otvet = ans 
+        return otvet  
 
-    if win:
-        print('вы выйграли')
-        print('правильный ответ: ', number)
-    else:
-        print('вы проиграли')
-        print('правильный ответ: ', number)
-
-elif rezhim == 3:
+def game(result, popitki, rezhim):
     for i in range(popitki):
-        print('попытка номер', i)
-        ans = int(input('введите 1 число: '))
-        if ans == number:
-            win = True
-            break
-        elif ans < number:
+        print('попытка номер', i, '/', popitki)
+
+        otvet = get_answer(rezhim)
+
+        if otvet == result:
+            return True
+        elif otvet < result:
             print('число больше')
         else:
             print('число меньше')
 
+    return False
+
+def game_result(win, number, rezhim):
     if win:
         print('вы выйграли')
-        print('правильный ответ: ', number)
+        if rezhim != 3:
+            print('правильный ответ: ', number)
     else:
         print('вы проиграли')
         print('правильный ответ: ', number)
 
+
+if 1 <= rezhim <= 3:
+    win = game(number, popitki, rezhim)
+    game_result(win, number, rezhim)
 else:
     print('bruh')
