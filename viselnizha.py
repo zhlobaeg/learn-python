@@ -1,5 +1,8 @@
+import viselnizha_words
+
 print('игра висельница')
-word = input('загадай слово: ')
+
+word = viselnizha_words.get_random_word()
 
 letter = input('напиши букву: ')
 
@@ -16,3 +19,4 @@ def hide_word(word, letter = None):
 
     
 print(hide_word(word, letter))
+print(word)
