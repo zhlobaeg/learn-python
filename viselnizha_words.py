@@ -999,7 +999,8 @@ words = """1	год
 997	ведомство
 998	преимущество
 999	мина
-1000	полномочие"""
+1000 полномочие
+1001 исуся"""
 
 def get_words():
     resoult = []
@@ -1013,5 +1014,3 @@ def get_random_word():
     all_words = get_words()
     random_word = random.choice(all_words)
     return random_word
-
-print(get_random_word())
