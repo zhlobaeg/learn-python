@@ -1,7 +1,7 @@
 import viselnizha_words
 
 print('игра висельница')
-guess_limit = 25
+guess_limit = 30
 guessed_letters = []
 print('есть', guess_limit, 'попыток')
 
