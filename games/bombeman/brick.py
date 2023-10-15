@@ -13,7 +13,7 @@ class Brick:
         surface.blit(self.img, self.rect)
     
     def set_skin(self, skin_name):
-        self.img = pygame.image.load(f'./images/brick_{skin_name}.jpg')
+        self.img = pygame.image.load(f'./images/brick_{skin_name}.png')
         self.img.convert()
         self.rect = self.img.get_rect()
         self.rect.x = self.x

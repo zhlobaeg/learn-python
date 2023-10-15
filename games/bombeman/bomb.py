@@ -5,18 +5,27 @@ BLAST_TIME = 15
 BOMB_SIZE = 20
 
 class Bomb:
-    def __init__(self, x, y, color, blast_color):
+    def __init__(self, x, y, skin_name):
         self.x = x
         self.y = y
-        self.color = color
-        self.blast_color = blast_color
+        self.blast_img = pygame.image.load(f'./images/blust_1.png')
+        self.blast_img.convert()
+        self.rect = self.blast_img.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.blast_img = pygame.transform.rotozoom(self.blast_img, 0, 40 / self.rect.width)
         self.counter = LIFE_TIME
+        self.set_skin(skin_name)
 
     def draw(self, surface):
-        curr_color = self.color
         if self.counter < 0:
-            curr_color = self.blast_color
-        pygame.draw.circle(surface, curr_color, (self.x + 20, self.y + 20), BOMB_SIZE)    
+            self.rect.x = self.x
+            self.rect.y = self.y
+            surface.blit(self.blast_img, self.rect)
+        else:
+            self.rect.x = self.x
+            self.rect.y = self.y
+            surface.blit(self.img, self.rect)          
     
     def tick(self):
         self.counter -= 1
@@ -31,3 +40,10 @@ class Bomb:
         hit_right = (self.x == brick.x + 40) and (self.y == brick.y)
         return boom and (hit or hit_top or hit_bottom or hit_left or hit_right)
     
+    def set_skin(self, skin_name):
+        self.img = pygame.image.load(f'./images/bomb_{skin_name}.png')
+        self.img.convert()
+        self.rect = self.img.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.img = pygame.transform.rotozoom(self.img, 0, 40 / self.rect.width)

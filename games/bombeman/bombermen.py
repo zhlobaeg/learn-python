@@ -15,7 +15,7 @@ pygame.display.set_caption('Bomberman')
 surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
-#TODO: звуки
+#TODO: звукиww
 #TODO: заменить картинки для игрока на png
 #TODO: текстуры для бомб
 curr_skin = skin.skin_1
@@ -73,7 +73,7 @@ while running:
             elif event.key == pygame.K_s:
                 bomber.step_down()
             elif event.key == pygame.K_SPACE:
-                b = bomb.Bomb(bomber.x, bomber.y, curr_skin.bomb_color, curr_skin.bomb_blast_color)
+                b = bomb.Bomb(bomber.x, bomber.y, curr_skin.name)
                 bombs.append(b)
             elif event.key == pygame.K_1:
                 change_skin(1)
