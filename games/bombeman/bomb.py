@@ -13,14 +13,14 @@ class Bomb:
         self.rect = self.blast_img.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
-        self.blast_img = pygame.transform.rotozoom(self.blast_img, 0, 40 / self.rect.width)
+        self.blast_img = pygame.transform.rotozoom(self.blast_img, 0, 120 / self.rect.width)
         self.counter = LIFE_TIME
         self.set_skin(skin_name)
 
     def draw(self, surface):
         if self.counter < 0:
-            self.rect.x = self.x
-            self.rect.y = self.y
+            self.rect.x = self.x - 40
+            self.rect.y = self.y - 40
             surface.blit(self.blast_img, self.rect)
         else:
             self.rect.x = self.x

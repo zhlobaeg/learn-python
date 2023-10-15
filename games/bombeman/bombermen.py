@@ -15,9 +15,10 @@ pygame.display.set_caption('Bomberman')
 surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
-#TODO: звукиww
-#TODO: заменить картинки для игрока на png
-#TODO: текстуры для бомб
+#TODO: картинка с прозр фоном(взрыва)
+#TODO: игрок не окружён стенами на появлении
+#TODO: звуки
+
 curr_skin = skin.skin_1
 bomber = player.Player(curr_skin.name, surface)
 bombs = []
