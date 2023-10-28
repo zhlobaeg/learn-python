@@ -1,4 +1,6 @@
 import pygame
+import random
+import brick
 
 class Labyrinth:
 
@@ -18,3 +20,14 @@ class Labyrinth:
         while y < surface.get_height():
             pygame.draw.line(surface, self.color, (0, y), (x, y))
             y += step
+
+    def fill_with_bricks(self, curr_skin):
+        bricks = []
+        for i in range(0, 175):
+            x = random.randint(0, 17) * 40
+            y = random.randint(0, 17) * 40
+            if x < 80 and y < 80:
+                continue
+            br = brick.Brick(x, y, curr_skin.name)
+            bricks.append(br)
+        return bricks

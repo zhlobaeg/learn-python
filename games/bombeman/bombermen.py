@@ -15,22 +15,15 @@ pygame.display.set_caption('Bomberman')
 surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
+#TODO: проверить переключение скина бомбы
 #TODO: картинка с прозр фоном(взрыва)
-#TODO: игрок не окружён стенами на появлении
 #TODO: звуки
 
 curr_skin = skin.skin_1
 bomber = player.Player(curr_skin.name, surface)
 bombs = []
-bricks = []
 laby = labyrinth.Labyrinth(curr_skin.brick_color)
-
-for i in range(0, 150):
-    x = random.randint(0, 17) * 40
-    y = random.randint(0, 17) * 40
-    br = brick.Brick(x, y, curr_skin.name)
-    bricks.append(br)
-
+bricks = laby.fill_with_bricks(curr_skin)
 
 def change_skin(skin_number):
     global curr_skin
