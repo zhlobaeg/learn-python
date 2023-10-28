@@ -16,8 +16,10 @@ pygame.display.set_caption('Bomberman')
 surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
+#TODO: сделать несколько монстров
+#TODO: добавить ходибу монстров и смерть игрока от них
 #TODO: смена скина бомбы
-#TODO: картинка с прозр фоном(взрыва)
+#TODO: картинка с прозр фоном(взрыва и остальных)
 #TODO: звуки
 
 curr_skin = skin.skin_1
