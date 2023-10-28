@@ -8,10 +8,10 @@ class Player:
         self.surface = surface
         self.set_skin(skin_name)
 
-    def draw(self, surface):
+    def draw(self):
         self.rect.x = self.x
         self.rect.y = self.y
-        surface.blit(self.img, self.rect)
+        self.surface.blit(self.img, self.rect)
 
     def step_left(self):
         if self.x - self.step >= 0: 

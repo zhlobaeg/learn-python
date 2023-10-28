@@ -7,6 +7,7 @@ import bomb
 import labyrinth
 import brick
 import skin
+import monster
 
 FPS = 30
 
@@ -15,7 +16,7 @@ pygame.display.set_caption('Bomberman')
 surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
-#TODO: проверить переключение скина бомбы
+#TODO: смена скина бомбы
 #TODO: картинка с прозр фоном(взрыва)
 #TODO: звуки
 
@@ -24,6 +25,7 @@ bomber = player.Player(curr_skin.name, surface)
 bombs = []
 laby = labyrinth.Labyrinth(curr_skin.brick_color)
 bricks = laby.fill_with_bricks(curr_skin)
+mons = monster.Monster(surface, 80, 160)
 
 def change_skin(skin_number):
     global curr_skin
@@ -111,7 +113,8 @@ while running:
     bombs = list(set(bombs) - set(exploded_bombs))
     
     
-    bomber.draw(surface)
+    bomber.draw()
+    mons.draw()
 
     pygame.display.update()
 
