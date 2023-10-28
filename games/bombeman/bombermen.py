@@ -25,7 +25,7 @@ bomber = player.Player(curr_skin.name, surface)
 bombs = []
 laby = labyrinth.Labyrinth(curr_skin.brick_color)
 bricks = laby.fill_with_bricks(curr_skin)
-mons = monster.Monster(surface, 80, 160)
+mons = monster.Monster(surface, 17 * 40, 17 * 40)
 
 def change_skin(skin_number):
     global curr_skin
@@ -94,6 +94,11 @@ while running:
         for b in bombs:
             if b.check_hit(brick):
                 exploded_bricks.append(brick)
+
+    if bomber.check_hit(mons):
+        bomber.x = player_x
+        bomber.y = player_y
+
     bricks = list(set(bricks) - set(exploded_bricks))
     
     exploded_bombs = []
@@ -109,7 +114,10 @@ while running:
         if b.check_hit(bomber):
             running = False
             game_over()
-            break       
+            break
+        if b.check_hit(mons):
+            mons.delete()
+                
     bombs = list(set(bombs) - set(exploded_bombs))
     
     

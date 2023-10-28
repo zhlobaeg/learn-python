@@ -28,6 +28,8 @@ class Labyrinth:
             y = random.randint(0, 17) * 40
             if x < 80 and y < 80:
                 continue
+            if x >= 16 * 40 and y >= 16 * 40:
+                continue
             br = brick.Brick(x, y, curr_skin.name)
             bricks.append(br)
         return bricks

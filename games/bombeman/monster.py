@@ -6,6 +6,12 @@ class Monster:
         self.y = y
         self.step = 40
         self.surface = surface
+        self.alive = True
 
     def draw(self):
-        pygame.draw.circle(self.surface, (255, 0, 0), (self.x + 20, self.y + 20), 20)
+        if self.alive:
+            pygame.draw.circle(self.surface, (255, 0, 0), (self.x + 20, self.y + 20), 20)
+
+    def delete(self):
+        self.alive = False
+        self.x = -100
