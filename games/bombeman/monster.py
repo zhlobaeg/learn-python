@@ -1,10 +1,12 @@
 import pygame
+import character
 
-class Monster:
+class Monster(character.Character):
     def __init__(self, surface, x, y):
+        print('djk')
+        super().__init__()
         self.x = x
         self.y = y
-        self.step = 40
         self.surface = surface
         self.alive = True
 

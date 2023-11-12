@@ -53,9 +53,6 @@ while running:
     clock.tick(FPS)
     events = pygame.event.get()
 
-    player_x = bomber.x
-    player_y = bomber.y
-
     for event in events:
         if event.type == pygame.QUIT:
             running = False
@@ -79,27 +76,35 @@ while running:
                 change_skin(2)
             elif event.key == pygame.K_3:
                 change_skin(3)
+
+            if event.key == pygame.K_LEFT:
+                mons.step_left()
+            elif event.key == pygame.K_RIGHT:
+                mons.step_right()
+            elif event.key == pygame.K_UP:
+                mons.step_up()
+            elif event.key == pygame.K_DOWN:
+                mons.step_down()
         
     
     surface.fill(curr_skin.background_color)
 
     laby.draw(surface)
 
-
     exploded_bricks = [] 
 
     for brick in bricks:
         brick.draw(surface)
         if bomber.check_hit(brick):
-            bomber.x = player_x
-            bomber.y = player_y
+            bomber.step_back()
+        if mons.check_hit(brick):
+            mons.step_back()
         for b in bombs:
             if b.check_hit(brick):
                 exploded_bricks.append(brick)
 
     if bomber.check_hit(mons):
-        bomber.x = player_x
-        bomber.y = player_y
+        bomber.step_back()
 
     bricks = list(set(bricks) - set(exploded_bricks))
     
@@ -111,8 +116,7 @@ while running:
         else:
             exploded_bombs.append(b)
         if bomber.check_hit(b):
-            bomber.x = player_x
-            bomber.y = player_y
+            bomber.step_back()
         if b.check_hit(bomber):
             running = False
             game_over()
