@@ -134,7 +134,7 @@ while running:
         for mons in monsters:
             if b.check_hit(mons):
                 mons.delete()
-                #TODO: убрать монстра из списка
+                #TODO: убрать монстра из списка, use deleted_monsters
                 
     bombs = list(set(bombs) - set(exploded_bombs))
     
