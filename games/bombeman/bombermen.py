@@ -9,13 +9,14 @@ import brick
 import skin
 import monster
 
-FPS = 30
+FPS = 50
 
 pygame.init()
 pygame.display.set_caption('Bomberman')
 surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
+#TODO: смерть монстров
 #TODO: сделать несколько монстров
 #TODO: добавить ходибу монстров и смерть игрока от них
 #TODO: смена скина бомбы
@@ -85,6 +86,8 @@ while running:
                 mons.step_up()
             elif event.key == pygame.K_DOWN:
                 mons.step_down()
+
+    mons.walk()
         
     
     surface.fill(curr_skin.background_color)
