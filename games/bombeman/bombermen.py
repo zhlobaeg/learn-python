@@ -18,7 +18,7 @@ clock = pygame.time.Clock()
 
 #TODO: смерть монстров
 #TODO: сделать несколько монстров
-#TODO: добавить ходибу монстров и смерть игрока от них
+#TODO: смерть игрока от них
 #TODO: смена скина бомбы
 #TODO: картинка с прозр фоном(взрыва и остальных)
 #TODO: звуки
@@ -28,7 +28,12 @@ bomber = player.Player(curr_skin.name, surface)
 bombs = []
 laby = labyrinth.Labyrinth(curr_skin.brick_color)
 bricks = laby.fill_with_bricks(curr_skin)
-mons = monster.Monster(surface, 17 * 40, 17 * 40)
+monsters = []
+for i in range(5):
+    mons = monster.Monster(surface, 17 * 40, 17 * 40)
+    monsters.append(mons)
+
+mons1 = monsters[0]
 
 def change_skin(skin_number):
     global curr_skin
@@ -79,15 +84,16 @@ while running:
                 change_skin(3)
 
             if event.key == pygame.K_LEFT:
-                mons.step_left()
+                mons1.step_left()
             elif event.key == pygame.K_RIGHT:
-                mons.step_right()
+                mons1.step_right()
             elif event.key == pygame.K_UP:
-                mons.step_up()
+                mons1.step_up()
             elif event.key == pygame.K_DOWN:
-                mons.step_down()
+                mons1.step_down()
 
-    mons.walk()
+    for mons in monsters:
+        mons.walk()
         
     
     surface.fill(curr_skin.background_color)
@@ -100,14 +106,16 @@ while running:
         brick.draw(surface)
         if bomber.check_hit(brick):
             bomber.step_back()
-        if mons.check_hit(brick):
-            mons.step_back()
+        for mons in monsters:
+            if mons.check_hit(brick):
+                mons.step_back()
         for b in bombs:
             if b.check_hit(brick):
                 exploded_bricks.append(brick)
 
-    if bomber.check_hit(mons):
-        bomber.step_back()
+    for mons in monsters:
+        if bomber.check_hit(mons):
+            bomber.step_back()
 
     bricks = list(set(bricks) - set(exploded_bricks))
     
@@ -124,14 +132,17 @@ while running:
             running = False
             game_over()
             break
-        if b.check_hit(mons):
-            mons.delete()
+        for mons in monsters:
+            if b.check_hit(mons):
+                mons.delete()
+                #TODO: убрать монстра из списка
                 
     bombs = list(set(bombs) - set(exploded_bombs))
     
     
     bomber.draw()
-    mons.draw()
+    for mons in monsters:
+        mons.draw()
 
     pygame.display.update()
 
