@@ -17,7 +17,6 @@ surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
 #TODO: смерть монстров
-#TODO: сделать несколько монстров
 #TODO: смерть игрока от них
 #TODO: смена скина бомбы
 #TODO: картинка с прозр фоном(взрыва и остальных)
