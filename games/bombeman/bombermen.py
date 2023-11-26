@@ -16,8 +16,6 @@ pygame.display.set_caption('Bomberman')
 surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
-#TODO: смерть монстров
-#TODO: смерть игрока от них
 #TODO: смена скина бомбы
 #TODO: картинка с прозр фоном(взрыва и остальных)
 #TODO: звуки
@@ -114,7 +112,9 @@ while running:
 
     for mons in monsters:
         if bomber.check_hit(mons):
-            bomber.step_back()
+            running = False
+            game_over()
+            break
 
     bricks = list(set(bricks) - set(exploded_bricks))
     
