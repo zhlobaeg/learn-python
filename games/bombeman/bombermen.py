@@ -16,10 +16,6 @@ pygame.display.set_caption('Bomberman')
 surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
-#TODO: смена скина бомбы
-#TODO: картинка с прозр фоном(взрыва и остальных)
-#TODO: звуки
-
 curr_skin = skin.skin_1
 bomber = player.Player(curr_skin.name, surface)
 bombs = []
@@ -78,6 +74,9 @@ while running:
             elif event.key == pygame.K_SPACE:
                 b = bomb.Bomb(bomber.x, bomber.y, curr_skin.name)
                 bombs.append(b)
+            elif event.key == pygame.K_e:
+                g_b = bomb.GhostBomb(surface, bomber.x, bomber.y, curr_skin.name)
+                bombs.append(g_b)
             elif event.key == pygame.K_1:
                 change_skin(1)
             elif event.key == pygame.K_2:
@@ -138,7 +137,7 @@ while running:
             game_over()
             break
         for mons in monsters:
-            if b.check_hit(mons) and not mons.immortal:
+            if b.check_hit(mons) and (b.ghost == mons.ghost):
                 exploded_monsters.append(mons)
                 
     bombs = list(set(bombs) - set(exploded_bombs))

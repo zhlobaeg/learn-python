@@ -9,7 +9,7 @@ class Monster(character.Character):
         self.y = y
         self.surface = surface
         self.sec_counter = 0
-        self.immortal = False
+        self.ghost = False
 
     def draw(self):
         pygame.draw.circle(self.surface, (255, 0, 0), (self.x + 20, self.y + 20), 20)
@@ -37,7 +37,7 @@ class Monster(character.Character):
 class GhostMonster(Monster):
     def __init__(self, surface, x, y):
         super().__init__(surface, x, y)
-        self.immortal = True
+        self.ghost = True
 
     def draw(self):
         pygame.draw.circle(self.surface, (204, 255, 255), (self.x + 20, self.y + 20), 20)
