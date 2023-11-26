@@ -119,6 +119,7 @@ while running:
     bricks = list(set(bricks) - set(exploded_bricks))
     
     exploded_bombs = []
+    exploded_monsters = []
 
     for b in bombs:
         if b.tick():
@@ -133,10 +134,10 @@ while running:
             break
         for mons in monsters:
             if b.check_hit(mons):
-                mons.delete()
-                #TODO: убрать монстра из списка, use deleted_monsters
+                exploded_monsters.append(mons)
                 
     bombs = list(set(bombs) - set(exploded_bombs))
+    monsters = list(set(monsters) - set(exploded_monsters))
     
     
     bomber.draw()

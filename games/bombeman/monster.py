@@ -4,7 +4,6 @@ import random
 
 class Monster(character.Character):
     def __init__(self, surface, x, y):
-        print('djk')
         super().__init__()
         self.x = x
         self.y = y
@@ -15,10 +14,6 @@ class Monster(character.Character):
     def draw(self):
         if self.alive:
             pygame.draw.circle(self.surface, (255, 0, 0), (self.x + 20, self.y + 20), 20)
-
-    def delete(self):
-        self.alive = False
-        self.x = -100
 
     def walk(self):
         self.sec_counter += 1
