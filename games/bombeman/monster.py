@@ -8,12 +8,11 @@ class Monster(character.Character):
         self.x = x
         self.y = y
         self.surface = surface
-        self.alive = True
         self.sec_counter = 0
+        self.immortal = False
 
     def draw(self):
-        if self.alive:
-            pygame.draw.circle(self.surface, (255, 0, 0), (self.x + 20, self.y + 20), 20)
+        pygame.draw.circle(self.surface, (255, 0, 0), (self.x + 20, self.y + 20), 20)
 
     def walk(self):
         self.sec_counter += 1
@@ -34,3 +33,14 @@ class Monster(character.Character):
     def step_back(self):
         super().step_back()
         self.sec_counter = 49
+
+class GhostMonster(Monster):
+    def __init__(self, surface, x, y):
+        super().__init__(surface, x, y)
+        self.immortal = True
+
+    def draw(self):
+        pygame.draw.circle(self.surface, (204, 255, 255), (self.x + 20, self.y + 20), 20)
+
+    def check_hit(self, obstacle):
+        return False

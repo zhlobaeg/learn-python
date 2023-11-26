@@ -29,6 +29,11 @@ monsters = []
 for i in range(5):
     mons = monster.Monster(surface, 17 * 40, 17 * 40)
     monsters.append(mons)
+g_mons = monster.GhostMonster(surface, 17 * 40, 17 * 40)
+g_mons2 = monster.GhostMonster(surface, 17 * 40, 17 * 40)
+monsters.append(g_mons)
+monsters.append(g_mons2)
+
 
 mons1 = monsters[0]
 
@@ -133,7 +138,7 @@ while running:
             game_over()
             break
         for mons in monsters:
-            if b.check_hit(mons):
+            if b.check_hit(mons) and not mons.immortal:
                 exploded_monsters.append(mons)
                 
     bombs = list(set(bombs) - set(exploded_bombs))
