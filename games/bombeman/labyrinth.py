@@ -21,15 +21,25 @@ class Labyrinth:
             pygame.draw.line(surface, self.color, (0, y), (x, y))
             y += step
 
-    def fill_with_bricks(self, curr_skin):
+    def generate_coordinates(self):
+        x = random.randint(0, 17) * 40
+        y = random.randint(0, 17) * 40
+        if x < 80 and y < 80:
+            return self.generate_coordinates()
+        if x >= 16 * 40 and y >= 16 * 40:
+            return self.generate_coordinates()
+        return (x, y)
+
+    def fill_with_bricks(self):
         bricks = []
         for i in range(0, 175):
-            x = random.randint(0, 17) * 40
-            y = random.randint(0, 17) * 40
-            if x < 80 and y < 80:
-                continue
-            if x >= 16 * 40 and y >= 16 * 40:
-                continue
-            br = brick.Brick(x, y, curr_skin.name)
+            (x, y) = self.generate_coordinates()
+            br = brick.Brick(x, y)
             bricks.append(br)
+
+        for i in range(10):
+            (x, y) = self.generate_coordinates()
+            br = brick.UnbreakingBrick(x, y)
+            bricks.append(br)
+
         return bricks

@@ -20,7 +20,7 @@ curr_skin = skin.skin_1
 bomber = player.Player(curr_skin.name, surface)
 bombs = []
 laby = labyrinth.Labyrinth(curr_skin.brick_color)
-bricks = laby.fill_with_bricks(curr_skin)
+bricks = laby.fill_with_bricks()
 monsters = []
 for i in range(5):
     mons = monster.Monster(surface, 17 * 40, 17 * 40)
@@ -44,8 +44,6 @@ def change_skin(skin_number):
         curr_skin = skin.skin_3
     bomber.set_skin(curr_skin.name)
     laby.color = curr_skin.brick_color
-    for brick in bricks:
-        brick.set_skin(curr_skin.name)
 
 def game_over():
     tkinter.messagebox.showinfo('GAME OVER','OK')
@@ -111,7 +109,7 @@ while running:
             if mons.check_hit(brick):
                 mons.step_back()
         for b in bombs:
-            if b.check_hit(brick):
+            if b.check_hit(brick) and brick.strength < 20:
                 exploded_bricks.append(brick)
 
     for mons in monsters:
