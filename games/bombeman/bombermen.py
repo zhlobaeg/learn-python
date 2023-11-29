@@ -46,7 +46,7 @@ def change_skin(skin_number):
     laby.color = curr_skin.brick_color
 
 def game_over():
-    tkinter.messagebox.showinfo('GAME OVER','OK')
+    tkinter.messagebox.showinfo('ласт кристмас','сдох)')
 
 
 running = True
