@@ -4,15 +4,12 @@ import random
 
 class Monster(character.Character):
     def __init__(self, surface, x, y):
-        super().__init__()
+        super().__init__(surface)
         self.x = x
         self.y = y
-        self.surface = surface
         self.sec_counter = 0
         self.ghost = False
-
-    def draw(self):
-        pygame.draw.circle(self.surface, (255, 0, 0), (self.x + 20, self.y + 20), 20)
+        self.color = (255, 0, 0)
 
     def walk(self):
         self.sec_counter += 1
@@ -38,9 +35,7 @@ class GhostMonster(Monster):
     def __init__(self, surface, x, y):
         super().__init__(surface, x, y)
         self.ghost = True
-
-    def draw(self):
-        pygame.draw.circle(self.surface, (204, 255, 255), (self.x + 20, self.y + 20), 20)
+        self.color = (204, 255, 255)
 
     def check_hit(self, obstacle):
         return False

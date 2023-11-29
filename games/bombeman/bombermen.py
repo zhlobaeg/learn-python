@@ -20,7 +20,7 @@ curr_skin = skin.skin_1
 bomber = player.Player(curr_skin.name, surface)
 bombs = []
 laby = labyrinth.Labyrinth(curr_skin.brick_color)
-bricks = laby.fill_with_bricks()
+bricks = laby.fill_with_bricks(surface)
 monsters = []
 for i in range(5):
     mons = monster.Monster(surface, 17 * 40, 17 * 40)
@@ -102,7 +102,7 @@ while running:
     exploded_bricks = [] 
 
     for brick in bricks:
-        brick.draw(surface)
+        brick.draw()
         if bomber.check_hit(brick):
             bomber.step_back()
         for mons in monsters:

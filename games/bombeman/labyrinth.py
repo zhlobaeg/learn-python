@@ -30,16 +30,16 @@ class Labyrinth:
             return self.generate_coordinates()
         return (x, y)
 
-    def fill_with_bricks(self):
+    def fill_with_bricks(self, surface):
         bricks = []
         for i in range(0, 175):
             (x, y) = self.generate_coordinates()
-            br = brick.Brick(x, y)
+            br = brick.Brick(surface, x, y)
             bricks.append(br)
 
         for i in range(10):
             (x, y) = self.generate_coordinates()
-            br = brick.UnbreakingBrick(x, y)
+            br = brick.UnbreakingBrick(surface, x, y)
             bricks.append(br)
 
         return bricks

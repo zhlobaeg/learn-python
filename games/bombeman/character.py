@@ -1,9 +1,33 @@
 import pygame
 
-class Character:
-    def __init__(self):
+class GameObject:
+    def __init__(self, surface):
+        self.surface = surface
         self.x = 0
         self.y = 0
+        self.img = None
+        self.rect = None
+        self.color = (73, 200, 158)
+
+    def set_skin(self, img_file):
+        self.img = pygame.image.load(img_file)
+        self.img.convert()
+        self.rect = self.img.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.img = pygame.transform.rotozoom(self.img, 0, 40 / self.rect.width)
+
+    def draw(self):       
+        if self.img:
+            self.rect.x = self.x
+            self.rect.y = self.y
+            self.surface.blit(self.img, self.rect)
+        else:
+            pygame.draw.circle(self.surface, self.color, (self.x + 20, self.y + 20), 20)
+
+class Character(GameObject):
+    def __init__(self, surface):
+        super().__init__(surface)
         self.prev_x = 0
         self.prev_y = 0
         self.step = 40
