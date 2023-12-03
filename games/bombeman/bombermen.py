@@ -128,6 +128,8 @@ while running:
         brick.draw()
         if bomber.check_hit(brick):
             bomber.step_back()
+            if pick and brick.strength < 20:
+                exploded_bricks.append(brick)
         for mons in monsters:
             if mons.check_hit(brick):
                 mons.step_back()
