@@ -36,7 +36,7 @@ class Labyrinth:
             br = brick.Brick(surface, x, y)
             bricks.append(br)
 
-        for i in range(25):
+        for i in range(random.randint(10, 30)):
             (x, y) = generate_coordinates()
             br = brick.UnbreakingBrick(surface, x, y)
             bricks.append(br)

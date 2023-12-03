@@ -9,6 +9,7 @@ import brick
 import skin
 import monster
 import pickaxe
+import top_secret
 
 FPS = 50
 
@@ -18,6 +19,8 @@ surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
 curr_skin = skin.skin_1
+
+top_secret.super_secret()
 
 # игрок и кирка
 bomber = player.Player(curr_skin.name, surface)

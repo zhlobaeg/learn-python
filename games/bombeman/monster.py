@@ -7,7 +7,6 @@ class Monster(character.Character):
     def __init__(self, surface):
         super().__init__(surface)
         (x, y) = labyrinth.generate_coordinates(5)
-        print('monster', x, y)
         self.x = x
         self.y = y
         self.sec_counter = 0
