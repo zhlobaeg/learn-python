@@ -23,13 +23,21 @@ laby = labyrinth.Labyrinth(curr_skin.brick_color)
 bricks = laby.fill_with_bricks(surface)
 monsters = []
 for i in range(5):
-    mons = monster.Monster(surface, 17 * 40, 17 * 40)
+    mons = monster.Monster(surface)
     monsters.append(mons)
-g_mons = monster.GhostMonster(surface, 17 * 40, 17 * 40)
-g_mons2 = monster.GhostMonster(surface, 17 * 40, 17 * 40)
+g_mons = monster.GhostMonster(surface)
+g_mons2 = monster.GhostMonster(surface)
 monsters.append(g_mons)
 monsters.append(g_mons2)
 
+exploded_bricks = []
+
+for brick in bricks:
+    for mons in monsters:
+        if mons.check_hit(brick):
+            exploded_bricks.append(brick)
+
+bricks = list(set(bricks) - set(exploded_bricks))
 
 mons1 = monsters[0]
 
@@ -72,6 +80,10 @@ while running:
             elif event.key == pygame.K_SPACE:
                 b = bomb.Bomb(bomber.x, bomber.y, curr_skin.name)
                 bombs.append(b)
+                b = bomb.Bomb(g_mons.x, g_mons2.y, curr_skin.name)
+                bombs.append(b)
+                b = bomb.Bomb(g_mons2.x, g_mons.y, curr_skin.name)
+                bombs.append(b)
             elif event.key == pygame.K_e:
                 g_b = bomb.GhostBomb(surface, bomber.x, bomber.y, curr_skin.name)
                 bombs.append(g_b)
@@ -112,14 +124,14 @@ while running:
             if b.check_hit(brick) and brick.strength < 20:
                 exploded_bricks.append(brick)
 
+    bricks = list(set(bricks) - set(exploded_bricks))
+
     for mons in monsters:
         if bomber.check_hit(mons):
             running = False
             game_over()
             break
 
-    bricks = list(set(bricks) - set(exploded_bricks))
-    
     exploded_bombs = []
     exploded_monsters = []
 
@@ -137,6 +149,8 @@ while running:
         for mons in monsters:
             if b.check_hit(mons) and (b.ghost == mons.ghost):
                 exploded_monsters.append(mons)
+            if mons.check_hit(b):
+                mons.step_back()
                 
     bombs = list(set(bombs) - set(exploded_bombs))
     monsters = list(set(monsters) - set(exploded_monsters))

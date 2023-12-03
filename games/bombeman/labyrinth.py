@@ -2,6 +2,14 @@ import pygame
 import random
 import brick
 
+def generate_coordinates(free_cells = 2):
+        x = random.randint(0, 17) * 40
+        y = random.randint(0, 17) * 40
+        free = free_cells * 40
+        if x < free and y < free:
+            return generate_coordinates(free_cells)
+        return (x, y)
+
 class Labyrinth:
 
     def __init__(self, color):
@@ -21,24 +29,15 @@ class Labyrinth:
             pygame.draw.line(surface, self.color, (0, y), (x, y))
             y += step
 
-    def generate_coordinates(self):
-        x = random.randint(0, 17) * 40
-        y = random.randint(0, 17) * 40
-        if x < 80 and y < 80:
-            return self.generate_coordinates()
-        if x >= 16 * 40 and y >= 16 * 40:
-            return self.generate_coordinates()
-        return (x, y)
-
     def fill_with_bricks(self, surface):
         bricks = []
-        for i in range(0, 175):
-            (x, y) = self.generate_coordinates()
+        for i in range(0, 225):
+            (x, y) = generate_coordinates()
             br = brick.Brick(surface, x, y)
             bricks.append(br)
 
         for i in range(25):
-            (x, y) = self.generate_coordinates()
+            (x, y) = generate_coordinates()
             br = brick.UnbreakingBrick(surface, x, y)
             bricks.append(br)
 
