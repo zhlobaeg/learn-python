@@ -25,6 +25,10 @@ class GameObject:
         else:
             pygame.draw.circle(self.surface, self.color, (self.x + 20, self.y + 20), 20)
 
+    def place(self, x, y):
+        self.x = x
+        self.y = y
+
 class Character(GameObject):
     def __init__(self, surface):
         super().__init__(surface)

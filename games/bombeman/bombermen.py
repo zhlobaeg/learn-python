@@ -8,6 +8,7 @@ import labyrinth
 import brick
 import skin
 import monster
+import pickaxe
 
 FPS = 50
 
@@ -17,10 +18,17 @@ surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
 curr_skin = skin.skin_1
+
+# игрок и кирка
 bomber = player.Player(curr_skin.name, surface)
+pick = pickaxe.Pickaxe(surface, bomber.x, bomber.y)
 bombs = []
+
+# лабиринт и кирпичи
 laby = labyrinth.Labyrinth(curr_skin.brick_color)
 bricks = laby.fill_with_bricks(surface)
+
+# монстры
 monsters = []
 for i in range(5):
     mons = monster.Monster(surface)
@@ -29,7 +37,9 @@ g_mons = monster.GhostMonster(surface)
 g_mons2 = monster.GhostMonster(surface)
 monsters.append(g_mons)
 monsters.append(g_mons2)
+mons1 = monsters[0]
 
+# удаление кирпичей на монстрах
 exploded_bricks = []
 
 for brick in bricks:
@@ -39,7 +49,6 @@ for brick in bricks:
 
 bricks = list(set(bricks) - set(exploded_bricks))
 
-mons1 = monsters[0]
 
 def change_skin(skin_number):
     global curr_skin
@@ -63,6 +72,7 @@ while running:
     clock.tick(FPS)
     events = pygame.event.get()
 
+    # нажатия на клавиатуре
     for event in events:
         if event.type == pygame.QUIT:
             running = False
@@ -103,14 +113,15 @@ while running:
             elif event.key == pygame.K_DOWN:
                 mons1.step_down()
 
+    # монстры ходят по лабиринту
     for mons in monsters:
         mons.walk()
         
-    
+    # перерисовка лабиринта
     surface.fill(curr_skin.background_color)
-
     laby.draw(surface)
 
+    # check_hit с кирпичами и взрыв кирпичей
     exploded_bricks = [] 
 
     for brick in bricks:
@@ -122,16 +133,18 @@ while running:
                 mons.step_back()
         for b in bombs:
             if b.check_hit(brick) and brick.strength < 20:
-                exploded_bricks.append(brick)
+                exploded_bricks.append(brick)           
 
     bricks = list(set(bricks) - set(exploded_bricks))
 
+    # смерть игрока от монстров
     for mons in monsters:
         if bomber.check_hit(mons):
             running = False
             game_over()
             break
 
+    # бомба убивает монстров и игрока
     exploded_bombs = []
     exploded_monsters = []
 
@@ -155,8 +168,10 @@ while running:
     bombs = list(set(bombs) - set(exploded_bombs))
     monsters = list(set(monsters) - set(exploded_monsters))
     
-    
+    # отрисовка
     bomber.draw()
+    pick.place(bomber.x, bomber.y)
+    pick.draw()
     for mons in monsters:
         mons.draw()
 
