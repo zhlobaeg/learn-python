@@ -31,14 +31,18 @@ class Labyrinth:
 
     def fill_with_bricks(self, surface):
         bricks = []
-        for i in range(0, 225):
-            (x, y) = generate_coordinates()
-            br = brick.Brick(surface, x, y)
-            bricks.append(br)
-
-        for i in range(random.randint(10, 30)):
-            (x, y) = generate_coordinates()
-            br = brick.UnbreakingBrick(surface, x, y)
-            bricks.append(br)
+        for x in range(17):
+            for y in range(17):
+                if x < 2 and y < 2:
+                    continue
+                brick_probability = random.randint(0,289)
+                unbreaking_probabilty = random.randint(0, 100)
+                if brick_probability <= 150:
+                    if unbreaking_probabilty <= 15:
+                        br = brick.UnbreakingBrick(surface, x*40, y*40)
+                        bricks.append(br)
+                    else:
+                        br = brick.Brick(surface, x*40, y*40)
+                        bricks.append(br)
 
         return bricks
