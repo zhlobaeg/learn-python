@@ -106,6 +106,8 @@ while running:
                 change_skin(2)
             elif event.key == pygame.K_3:
                 change_skin(3)
+            elif event.key == pygame.K_f:
+                bomber.carry_pickaxe = not bomber.carry_pickaxe
 
             if event.key == pygame.K_LEFT:
                 mons1.step_left()
@@ -118,7 +120,8 @@ while running:
 
     # монстры ходят по лабиринту
     for mons in monsters:
-        mons.walk()
+        if mons != mons1:
+            mons.walk()
         
     # перерисовка лабиринта
     surface.fill(curr_skin.background_color)
@@ -145,7 +148,7 @@ while running:
 
     # смерть игрока от монстров
     for mons in monsters:
-        if bomber.check_hit(mons):
+        if bomber.check_hit(mons) and mons != mons1:
             running = False
             game_over()
             break
@@ -176,7 +179,8 @@ while running:
     
     # отрисовка
     bomber.draw()
-    pick.place(bomber.x, bomber.y)
+    if bomber.carry_pickaxe:
+        pick.place(bomber.x, bomber.y)
     pick.draw()
     for mons in monsters:
         mons.draw()
