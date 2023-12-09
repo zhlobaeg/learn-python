@@ -91,13 +91,14 @@ while running:
             elif event.key == pygame.K_s:
                 bomber.step_down()
             elif event.key == pygame.K_SPACE:
-                b = bomb.Bomb(bomber.x, bomber.y, curr_skin.name)
-                bombs.append(b)
+                if not bomber.carry_pickaxe:
+                    b = bomb.Bomb(bomber.x, bomber.y, curr_skin.name)
+                    bombs.append(b)
                 b = bomb.Bomb(g_mons.x, g_mons2.y, curr_skin.name)
                 bombs.append(b)
                 b = bomb.Bomb(g_mons2.x, g_mons.y, curr_skin.name)
                 bombs.append(b)
-            elif event.key == pygame.K_e:
+            elif event.key == pygame.K_e and not bomber.carry_pickaxe:
                 g_b = bomb.GhostBomb(surface, bomber.x, bomber.y, curr_skin.name)
                 bombs.append(g_b)
             elif event.key == pygame.K_1:
@@ -106,7 +107,7 @@ while running:
                 change_skin(2)
             elif event.key == pygame.K_3:
                 change_skin(3)
-            elif event.key == pygame.K_f:
+            elif event.key == pygame.K_f and bomber.check_hit(pick):
                 bomber.carry_pickaxe = not bomber.carry_pickaxe
 
             if event.key == pygame.K_LEFT:
