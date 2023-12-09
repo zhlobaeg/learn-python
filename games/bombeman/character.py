@@ -29,6 +29,12 @@ class GameObject:
         self.x = x
         self.y = y
 
+    def check_hit(self, obstacle):
+        if obstacle is None:
+            return False
+        hit = (self.x == obstacle.x) and (self.y == obstacle.y)
+        return hit
+
 class Character(GameObject):
     def __init__(self, surface):
         super().__init__(surface)
@@ -55,12 +61,6 @@ class Character(GameObject):
         if self.y + self.step < self.surface.get_height() - 1:
             self.save_pos() 
             self.y += self.step
-
-    def check_hit(self, obstacle):
-        if obstacle is None:
-            return False
-        hit = (self.x == obstacle.x) and (self.y == obstacle.y)
-        return hit
 
     def save_pos(self):
         self.prev_x = self.x

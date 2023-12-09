@@ -6,3 +6,4 @@ class Player(Character):
         super().__init__(surface)
         self.set_skin(f'./images/player_{skin_name}.png')
         self.carry_pickaxe = True
+        self.can_place_g_bomb = False

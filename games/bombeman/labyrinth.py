@@ -31,8 +31,8 @@ class Labyrinth:
 
     def fill_with_bricks(self, surface):
         bricks = []
-        for x in range(17):
-            for y in range(17):
+        for x in range(18):
+            for y in range(18):
                 if x < 2 and y < 2:
                     continue
                 brick_probability = random.randint(0,289)

@@ -10,6 +10,7 @@ import skin
 import monster
 import pickaxe
 import top_secret
+import generator
 
 FPS = 50
 
@@ -31,6 +32,9 @@ if pickaxe.chance_of_dropping():
 else:
     bomber.carry_pickaxe = False
 bombs = []
+
+# генератор
+gener = generator.Generator(surface)
 
 # лабиринт и кирпичи
 laby = labyrinth.Labyrinth(curr_skin.brick_color)
@@ -54,6 +58,8 @@ for brick in bricks:
     for mons in monsters:
         if mons.check_hit(brick):
             exploded_bricks.append(brick)
+    if gener.check_hit(brick):
+        exploded_bricks.append(brick)
 
 bricks = list(set(bricks) - set(exploded_bricks))
 
@@ -103,7 +109,7 @@ while running:
                 bombs.append(b)
                 b = bomb.Bomb(g_mons2.x, g_mons.y, curr_skin.name)
                 bombs.append(b)
-            elif event.key == pygame.K_e and not bomber.carry_pickaxe:
+            elif event.key == pygame.K_e and not bomber.carry_pickaxe and bomber.can_place_g_bomb:
                 g_b = bomb.GhostBomb(surface, bomber.x, bomber.y, curr_skin.name)
                 bombs.append(g_b)
             elif event.key == pygame.K_1:
@@ -182,6 +188,10 @@ while running:
                 
     bombs = list(set(bombs) - set(exploded_bombs))
     monsters = list(set(monsters) - set(exploded_monsters))
+
+    # проверка что игрок нашёл генератор
+    if gener.check_hit(bomber):
+        bomber.can_place_g_bomb= True
     
     # отрисовка
     bomber.draw()
@@ -191,6 +201,9 @@ while running:
         pick.draw()
     for mons in monsters:
         mons.draw()
+
+    if not bomber.can_place_g_bomb:
+        gener.draw()
 
     pygame.display.update()
 
