@@ -24,7 +24,12 @@ top_secret.super_secret()
 
 # игрок и кирка
 bomber = player.Player(curr_skin.name, surface)
-pick = pickaxe.Pickaxe(surface, bomber.x, bomber.y)
+pick = None
+if pickaxe.chance_of_dropping():
+    pick = pickaxe.Pickaxe(surface, bomber.x, bomber.y)
+    bomber.carry_pickaxe = True
+else:
+    bomber.carry_pickaxe = False
 bombs = []
 
 # лабиринт и кирпичи
@@ -182,7 +187,8 @@ while running:
     bomber.draw()
     if bomber.carry_pickaxe:
         pick.place(bomber.x, bomber.y)
-    pick.draw()
+    if pick:
+        pick.draw()
     for mons in monsters:
         mons.draw()
 

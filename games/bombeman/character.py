@@ -57,6 +57,8 @@ class Character(GameObject):
             self.y += self.step
 
     def check_hit(self, obstacle):
+        if obstacle is None:
+            return False
         hit = (self.x == obstacle.x) and (self.y == obstacle.y)
         return hit
 
