@@ -1,5 +1,4 @@
 import pygame
-import labyrinth
 
 LIFE_TIME = 90
 BLAST_TIME = 15
