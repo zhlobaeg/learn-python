@@ -202,7 +202,7 @@ while running:
     bomber.draw()
     if bomber.carry_pickaxe:
         pick.place(bomber.x, bomber.y)
-    if pick:
+    if pick :
         pick.draw()
     for mons in monsters:
         mons.draw()
