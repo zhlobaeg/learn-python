@@ -22,6 +22,7 @@ clock = pygame.time.Clock()
 curr_skin = skin.skin_1
 
 top_secret.super_secret()
+top_secret.SUS()
 
 # игрок и кирка
 bomber = player.Player(curr_skin.name, surface)
@@ -107,7 +108,7 @@ while running:
                     bombs.append(b)
                 b = bomb.Bomb(g_mons.x, g_mons2.y, curr_skin.name)
                 bombs.append(b)
-                b = bomb.Bomb(g_mons2.x, g_mons.y, curr_skin.name)
+                b = bomb.Bomb(g_mons2a.x, g_mons.y, curr_skin.name)
                 bombs.append(b)
             elif event.key == pygame.K_e and not bomber.carry_pickaxe and bomber.can_place_g_bomb:
                 g_b = bomb.GhostBomb(surface, bomber.x, bomber.y, curr_skin.name)
@@ -176,7 +177,7 @@ while running:
             exploded_bombs.append(b)
         if bomber.check_hit(b):
             bomber.step_back()
-        if b.check_hit(bomber):
+        if b.check_hit(bomber) or b.check_hit(mons1):
             running = False
             game_over()
             break
@@ -185,6 +186,10 @@ while running:
                 exploded_monsters.append(mons)
             if mons.check_hit(b):
                 mons.step_back()
+
+    # check_hit
+    if mons.check_hit(gener):
+        mons.step_back()
                 
     bombs = list(set(bombs) - set(exploded_bombs))
     monsters = list(set(monsters) - set(exploded_monsters))

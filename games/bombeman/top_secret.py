@@ -12,3 +12,7 @@ def super_secret():
         print('новый год скоро')
     elif secret == 4 or secret == 6:
         print('новый год супер скоро))')
+
+def SUS():
+    for i in range(random.randint(1, 100)):
+        print('WHEN IMPOSTER IS SUS!!!')

@@ -1,6 +1,7 @@
 import pygame
 import random
 import brick
+import bomb
 
 def generate_coordinates(free_cells = 2):
         x = random.randint(0, 17) * 40
