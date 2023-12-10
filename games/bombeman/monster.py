@@ -11,7 +11,7 @@ class Monster(character.Character):
         self.y = y
         self.sec_counter = 0
         self.ghost = False
-        self.color = (255, 0, 0)
+        self.set_skin(f'./images/monster.png')
 
     def walk(self):
         self.sec_counter += 1
