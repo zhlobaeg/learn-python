@@ -108,7 +108,7 @@ while running:
                     bombs.append(b)
                 b = bomb.Bomb(g_mons.x, g_mons2.y, curr_skin.name)
                 bombs.append(b)
-                b = bomb.Bomb(g_mons2a.x, g_mons.y, curr_skin.name)
+                b = bomb.Bomb(g_mons2.x, g_mons.y, curr_skin.name)
                 bombs.append(b)
             elif event.key == pygame.K_e and not bomber.carry_pickaxe and bomber.can_place_g_bomb:
                 g_b = bomb.GhostBomb(surface, bomber.x, bomber.y, curr_skin.name)

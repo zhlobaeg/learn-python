@@ -37,7 +37,7 @@ class GhostMonster(Monster):
     def __init__(self, surface):
         super().__init__(surface)
         self.ghost = True
-        self.color = (204, 255, 255)
+        self.set_skin(f'./images/ghost.png')
 
     def check_hit(self, obstacle):
         return False
