@@ -9,7 +9,7 @@ class GameObject:
         self.rect = None
         self.color = (73, 200, 158)
 
-    def set_skin(self, img_file):
+    def set_image(self, img_file):
         self.img = pygame.image.load(img_file)
         self.img.convert()
         self.rect = self.img.get_rect()

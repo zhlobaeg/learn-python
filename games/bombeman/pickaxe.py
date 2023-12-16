@@ -10,7 +10,7 @@ class Pickaxe(character.GameObject):
         super().__init__(surface)
         self.x = x
         self.y = y
-        self.set_skin(f'./images/pickaxe.png')
+        self.set_image('./images/pickaxe.png')
         self.durability = 5
 
     def hit(self):

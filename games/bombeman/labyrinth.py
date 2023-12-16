@@ -12,8 +12,8 @@ def generate_coordinates(free_cells = 2):
 
 class Labyrinth:
 
-    def __init__(self, color):
-        self.color = color
+    def __init__(self):
+        self.color = (200, 200, 200)
 
     def draw(self, surface):
         step = 40

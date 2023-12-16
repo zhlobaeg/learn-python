@@ -5,7 +5,7 @@ BLAST_TIME = 15
 BOMB_SIZE = 20
 
 class Bomb:
-    def __init__(self, x, y, skin_name):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
         self.blast_img = pygame.image.load(f'./images/blust_1.png')
@@ -16,8 +16,9 @@ class Bomb:
         self.blast_img = pygame.transform.rotozoom(self.blast_img, 0, 120 / self.rect.width)
         self.counter = LIFE_TIME
         self.img = pygame.image.load(f'./images/bomb_1.png')        
-        self.set_skin(skin_name)
-        self.ghost = False       
+        self.set_image()
+        self.ghost = False  
+
     def draw(self, surface):
         if self.counter < 0:
             self.rect.x = self.x - 40
@@ -41,7 +42,7 @@ class Bomb:
         hit_right = (self.x == brick.x + 40) and (self.y == brick.y)
         return boom and (hit or hit_top or hit_bottom or hit_left or hit_right)
     
-    def set_skin(self, skin_name):  
+    def set_image(self):  
         self.img.convert()
         self.rect = self.img.get_rect()
         self.rect.x = self.x
@@ -49,9 +50,9 @@ class Bomb:
         self.img = pygame.transform.rotozoom(self.img, 0, 40 / self.rect.width)
 
 class GhostBomb(Bomb):
-    def __init__(self, surface, x, y, skin_name):
-        super().__init__(x, y, skin_name)   
+    def __init__(self, surface, x, y):
+        super().__init__(x, y)   
         self.surface = surface
         self.img = pygame.image.load(f'./images/bomb_2.png')
         self.ghost = True    
-        self.set_skin(1)
+        self.set_image()

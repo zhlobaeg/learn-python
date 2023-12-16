@@ -6,7 +6,6 @@ import player
 import bomb
 import labyrinth
 import brick
-import skin
 import monster
 import pickaxe
 import top_secret
@@ -19,13 +18,11 @@ pygame.display.set_caption('Bomberman')
 surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
-curr_skin = skin.skin_1
-
 top_secret.super_secret()
 top_secret.SUS()
 
 # игрок и кирка
-bomber = player.Player(curr_skin.name, surface)
+bomber = player.Player(surface)
 pick = None
 if pickaxe.chance_of_dropping():
     pick = pickaxe.Pickaxe(surface, bomber.x, bomber.y)
@@ -38,7 +35,7 @@ bombs = []
 gener = generator.Generator(surface)
 
 # лабиринт и кирпичи
-laby = labyrinth.Labyrinth(curr_skin.brick_color)
+laby = labyrinth.Labyrinth()
 bricks = laby.fill_with_bricks(surface)
 
 # монстры
@@ -63,19 +60,6 @@ for brick in bricks:
         exploded_bricks.append(brick)
 
 bricks = list(set(bricks) - set(exploded_bricks))
-
-
-def change_skin(skin_number):
-    global curr_skin
-    global bricks
-    if skin_number == 1:
-        curr_skin = skin.skin_1
-    elif skin_number == 2:
-        curr_skin = skin.skin_2
-    elif skin_number == 3:
-        curr_skin = skin.skin_3
-    bomber.set_skin(curr_skin.name)
-    laby.color = curr_skin.brick_color
 
 def game_over():
     tkinter.messagebox.showinfo('ласт кристмас','сдох)')
@@ -104,21 +88,15 @@ while running:
                 bomber.step_down()
             elif event.key == pygame.K_SPACE:
                 if not bomber.carry_pickaxe:
-                    b = bomb.Bomb(bomber.x, bomber.y, curr_skin.name)
+                    b = bomb.Bomb(bomber.x, bomber.y)
                     bombs.append(b)
-                b = bomb.Bomb(g_mons.x, g_mons2.y, curr_skin.name)
+                b = bomb.Bomb(g_mons.x, g_mons2.y)
                 bombs.append(b)
-                b = bomb.Bomb(g_mons2.x, g_mons.y, curr_skin.name)
+                b = bomb.Bomb(g_mons2.x, g_mons.y)
                 bombs.append(b)
             elif event.key == pygame.K_e and not bomber.carry_pickaxe and bomber.can_place_g_bomb:
-                g_b = bomb.GhostBomb(surface, bomber.x, bomber.y, curr_skin.name)
+                g_b = bomb.GhostBomb(surface, bomber.x, bomber.y)
                 bombs.append(g_b)
-            elif event.key == pygame.K_1:
-                change_skin(1)
-            elif event.key == pygame.K_2:
-                change_skin(2)
-            elif event.key == pygame.K_3:
-                change_skin(3)
             elif event.key == pygame.K_f and bomber.check_hit(pick):
                 bomber.carry_pickaxe = not bomber.carry_pickaxe
 
@@ -137,7 +115,7 @@ while running:
             mons.walk()
         
     # перерисовка лабиринта
-    surface.fill(curr_skin.background_color)
+    surface.fill((0, 0, 0))
     laby.draw(surface)
 
     # check_hit с кирпичами и взрыв кирпичей

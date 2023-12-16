@@ -11,7 +11,7 @@ class Monster(character.Character):
         self.y = y
         self.sec_counter = 0
         self.ghost = False
-        self.set_skin(f'./images/monster.png')
+        self.set_image('./images/monster.png')
 
     def walk(self):
         self.sec_counter += 1
@@ -37,7 +37,7 @@ class GhostMonster(Monster):
     def __init__(self, surface):
         super().__init__(surface)
         self.ghost = True
-        self.set_skin(f'./images/ghost.png')
+        self.set_image('./images/ghost.png')
 
     def check_hit(self, obstacle):
         return False
