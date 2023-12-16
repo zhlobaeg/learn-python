@@ -10,6 +10,7 @@ import monster
 import pickaxe
 import top_secret
 import generator
+import black_hole
 
 FPS = 50
 
@@ -29,6 +30,10 @@ if pickaxe.chance_of_dropping():
 else:
     bomber.carry_pickaxe = False
 bombs = []
+
+#чёрные дыры
+b_hole = black_hole.BlackHole(surface)
+b_hole.place(80, 80)
 
 # генератор
 gener = generator.Generator(surface)
@@ -187,12 +192,14 @@ while running:
         pick.draw()
     else:
         bomber.carry_pickaxe = False
-        
+
     for mons in monsters:
         mons.draw()
 
     if not bomber.can_place_g_bomb:
         gener.draw()
+
+    b_hole.draw()
 
     pygame.display.update()
 
