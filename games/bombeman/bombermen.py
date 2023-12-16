@@ -146,13 +146,6 @@ while running:
 
     bricks = list(set(bricks) - set(exploded_bricks))
 
-    # смерть игрока от монстров
-    for mons in monsters:
-        if bomber.check_hit(mons) and mons != mons1:
-            running = False
-            game_over()
-            break
-
     # бомба убивает монстров и игрока
     exploded_bombs = []
     exploded_monsters = []
@@ -177,6 +170,15 @@ while running:
     # check_hit
     if mons.check_hit(gener):
         mons.step_back()
+    for mons in monsters:
+        for b_hole in black_holes:
+            if mons.check_hit(b_hole):
+                mons.step_back()
+                print('(^-^)')
+    for b_hole in black_holes:
+        if mons1.check_hit(b_hole):
+            mons1.step_back()
+            print('(^-^)')
                 
     bombs = list(set(bombs) - set(exploded_bombs))
     monsters = list(set(monsters) - set(exploded_monsters))
@@ -207,5 +209,17 @@ while running:
         gener.draw()
 
     pygame.display.update()
+
+    # смерть игрока
+    for mons in monsters:
+        if bomber.check_hit(mons) and mons != mons1:
+            running = False
+            game_over()
+
+    for b_hole in black_holes:
+        if bomber.check_hit(b_hole):
+            running = False
+            game_over()
+
 
 pygame.quit()
