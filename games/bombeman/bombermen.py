@@ -19,7 +19,6 @@ surface = pygame.display.set_mode((721, 721))
 clock = pygame.time.Clock()
 
 top_secret.super_secret()
-top_secret.SUS()
 
 # игрок и кирка
 bomber = player.Player(surface)
@@ -97,8 +96,12 @@ while running:
             elif event.key == pygame.K_e and not bomber.carry_pickaxe and bomber.can_place_g_bomb:
                 g_b = bomb.GhostBomb(surface, bomber.x, bomber.y)
                 bombs.append(g_b)
-            elif event.key == pygame.K_f and bomber.check_hit(pick):
-                bomber.carry_pickaxe = not bomber.carry_pickaxe
+            elif event.key == pygame.K_f:
+                if bomber.carry_pickaxe:
+                    bomber.carry_pickaxe = False
+                else:
+                    if bomber.check_hit(pick):
+                        bomber.carry_pickaxe = True
 
             if event.key == pygame.K_LEFT:
                 mons1.step_left()
@@ -124,7 +127,7 @@ while running:
     for brick in bricks:
         brick.draw()
         if bomber.check_hit(brick):
-            if pick and brick.strength < 20 and pick.hit():
+            if bomber.carry_pickaxe and brick.strength < 20 and pick.hit():
                 exploded_bricks.append(brick)
             else:
                 bomber.step_back()
@@ -180,8 +183,11 @@ while running:
     bomber.draw()
     if bomber.carry_pickaxe:
         pick.place(bomber.x, bomber.y)
-    if pick :
+    if pick and pick.durability > 0:
         pick.draw()
+    else:
+        bomber.carry_pickaxe = False
+        
     for mons in monsters:
         mons.draw()
 
