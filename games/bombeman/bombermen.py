@@ -32,8 +32,10 @@ else:
 bombs = []
 
 #чёрные дыры
-b_hole = black_hole.BlackHole(surface)
-b_hole.place(80, 80)
+black_holes = []
+for i in range(10):
+    b_hole = black_hole.BlackHole(surface)
+    black_holes.append(b_hole)
 
 # генератор
 gener = generator.Generator(surface)
@@ -130,7 +132,6 @@ while running:
     exploded_bricks = [] 
 
     for brick in bricks:
-        brick.draw()
         if bomber.check_hit(brick):
             if bomber.carry_pickaxe and brick.strength < 20 and pick.hit():
                 exploded_bricks.append(brick)
@@ -185,6 +186,12 @@ while running:
         bomber.can_place_g_bomb= True
     
     # отрисовка
+    for b_hole in black_holes:
+        b_hole.draw()
+
+    for brick in bricks:
+        brick.draw()
+
     bomber.draw()
     if bomber.carry_pickaxe:
         pick.place(bomber.x, bomber.y)
@@ -198,8 +205,6 @@ while running:
 
     if not bomber.can_place_g_bomb:
         gener.draw()
-
-    b_hole.draw()
 
     pygame.display.update()
 

@@ -2,9 +2,8 @@ import character
 import random
 
 def chance_of_dropping():
-        #number = random.randint(1, 5)
-        #return numner == 3
-        return True
+        number = random.randint(1, 5)
+        return number == 3
 
 class Pickaxe(character.GameObject):
     def __init__(self, surface,  x, y):
