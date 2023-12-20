@@ -25,7 +25,7 @@ top_secret.super_secret()
 # игрок
 bomber = player.Player(surface)
 
-# щит и щит с шипами
+# щит и супер щит
 shieldy = None
 if bomber.carry_shieldy:
     shieldy = shield.Shield(surface, 40, 40) 
