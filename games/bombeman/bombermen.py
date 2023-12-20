@@ -11,6 +11,7 @@ import pickaxe
 import top_secret
 import generator
 import black_hole
+import shield
 
 FPS = 50
 
@@ -21,10 +22,20 @@ clock = pygame.time.Clock()
 
 top_secret.super_secret()
 
-# игрок и кирка
+# игрок
 bomber = player.Player(surface)
+
+# щит и щит с шипами
+shieldy = None
+if bomber.carry_shieldy:
+    shieldy = shield.Shield(surface, 40, 40) 
+    bomber.carry_shieldy = True
+else:
+    bomber.carry_shieldy = False
+
+# кирка
 pick = None
-if pickaxe.chance_of_dropping():
+if pickaxe.chance_of_dropping() and not bomber.carry_shieldy:
     pick = pickaxe.Pickaxe(surface, bomber.x, bomber.y)
     bomber.carry_pickaxe = True
 else:
@@ -174,11 +185,13 @@ while running:
         for b_hole in black_holes:
             if mons.check_hit(b_hole):
                 mons.step_back()
-                print('(^-^)')
+            elif mons.check_hit(shieldy) and shieldy.protection():
+                mons.step_back()
+                shieldy.damage()
+
     for b_hole in black_holes:
         if mons1.check_hit(b_hole):
             mons1.step_back()
-            print('(^-^)')
                 
     bombs = list(set(bombs) - set(exploded_bombs))
     monsters = list(set(monsters) - set(exploded_monsters))
@@ -195,6 +208,9 @@ while running:
         brick.draw()
 
     bomber.draw()
+    if bomber.carry_shieldy and shieldy.protection():
+        shieldy.place(bomber.x, bomber.y)
+        shieldy.draw()
     if bomber.carry_pickaxe:
         pick.place(bomber.x, bomber.y)
     if pick and pick.durability > 0:
@@ -212,7 +228,7 @@ while running:
 
     # смерть игрока
     for mons in monsters:
-        if bomber.check_hit(mons) and mons != mons1:
+        if bomber.check_hit(mons) and mons != mons1 and not shieldy.protection():
             running = False
             game_over()
 
