@@ -6,7 +6,6 @@ import snake
 import food
 
 FPS = 3
-i = 0
 
 pygame.init()
 pygame.display.set_caption('Snake')

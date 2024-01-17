@@ -26,26 +26,27 @@ class Snake:
         step = 40
         if self.direction == Direction.right:
             self.x += step
-            if self.x >= self.surface.get_width():
+            if self.x >= self.surface.get_width() - 1:
                 self.x = 0
         elif self.direction == Direction.left:
             self.x -= step
             if self.x < 0:
-                self.x = self.surface.get_width()
+                self.x = self.surface.get_width() - 1
         elif self.direction == Direction.up:
             self.y -= step
             if self.y < 0:
-                self.y = self.surface.get_height()
+                self.y = self.surface.get_height() - 1
         elif self.direction == Direction.down:
             self.y += step
-            if self.y >= self.surface.get_height():
+            if self.y >= self.surface.get_height() - 1:
                 self.y = 0
         for i in range(len(self.body) - 1, 0, -1):
             self.body[i] = self.body[i - 1]
-        self.body[0] = (self.x, self.y)
+        self.body[0] = (self.x, self.y)       
 
     
     def check_hit(self, food):
+        print(self.x, self.y, '  ', food.x, food.y)
         return (self.x == food.x) and (self.y == food.y)
 
     def grow(self):
