@@ -28,9 +28,7 @@ bomber = player.Player(surface, 80, 80)
 # щит и супер щит
 shieldy = None
 if shield.chance_of_dropping() and not bomber.carry_pickaxe:
-    shieldy = shield.Shield(surface, 40, 40) 
-    bomber.carry_shieldy = True
-else:
+    shs
     bomber.carry_shieldy = False
 
 # кирка
@@ -185,7 +183,7 @@ while running:
         for b_hole in black_holes:
             if mons.check_hit(b_hole):
                 mons.step_back()
-            elif mons.check_hit(shieldy) and shieldy.protection():
+            elif mons.check_hit(shieldy) and shieldy and shieldy.protection():
                 mons.step_back()
                 shieldy.damage()
 
@@ -208,7 +206,7 @@ while running:
         brick.draw()
 
     bomber.draw()
-    if bomber.carry_shieldy and shieldy.protection():
+    if bomber.carry_shieldy and shieldy and shieldy.protection():
         shieldy.place(bomber.x, bomber.y)
         shieldy.draw()
     if bomber.carry_pickaxe:

@@ -20,6 +20,8 @@ running = True
 snaky = snake.Snake(surface, 0, 0)
 foood = food.Food(surface)
 
+i = 0
+
 while running:
     clock.tick(FPS)
     events = pygame.event.get()
@@ -42,11 +44,15 @@ while running:
     surface.fill((0, 0, 0))
     field.draw(surface)
 
+    i += 0.25
+    print(FPS, '  ', i)
+
     if snaky.check_hit(foood):
         foood = food.Food(surface)
         snaky.counter += 1
-        print(snaky.counter)
         snaky.grow()
+        FPS += i
+        print(FPS, '  ', i)
 
     foood.draw()
     snaky.move()
