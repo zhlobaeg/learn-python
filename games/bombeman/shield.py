@@ -5,8 +5,8 @@ import pickaxe
 import random
 
 def chance_of_dropping():
-        number = random.randint(1, 5)
-        return number == 3
+        number = random.randint(1, 3)
+        return number == 2
 
 class Shield(character.GameObject):
     def __init__(self, surface, x, y):

@@ -31,7 +31,7 @@ class Monster(character.Character):
 
     def step_back(self):
         super().step_back()
-        self.sec_counter = 49
+        self.sec_counter = 40
 
 class GhostMonster(Monster):
     def __init__(self, surface):

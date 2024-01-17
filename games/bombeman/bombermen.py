@@ -44,7 +44,7 @@ bombs = []
 
 #чёрные дыры
 black_holes = []
-for i in range(10):
+for i in range(12):
     b_hole = black_hole.BlackHole(surface)
     black_holes.append(b_hole)
 
@@ -57,7 +57,7 @@ bricks = laby.fill_with_bricks(surface)
 
 # монстры
 monsters = []
-for i in range(10):
+for i in range(20):
     mons = monster.Monster(surface)
     monsters.append(mons)
 g_mons = monster.GhostMonster(surface)
