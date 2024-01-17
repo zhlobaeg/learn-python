@@ -1,6 +1,12 @@
 import pygame
 import character
 import player
+import pickaxe
+import random
+
+def chance_of_dropping():
+        number = random.randint(1, 5)
+        return number == 3
 
 class Shield(character.GameObject):
     def __init__(self, surface, x, y):

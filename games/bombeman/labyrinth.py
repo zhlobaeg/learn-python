@@ -33,7 +33,7 @@ class Labyrinth:
         bricks = []
         for x in range(18):
             for y in range(18):
-                if x < 2 and y < 2:
+                if x < 3 and y < 3:
                     continue
                 brick_probability = random.randint(0,289)
                 unbreaking_probabilty = random.randint(0, 100)

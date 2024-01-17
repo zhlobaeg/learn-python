@@ -40,7 +40,11 @@ class Bomb:
         hit_top = (self.x == brick.x) and (self.y == brick.y + 40)
         hit_left = (self.x == brick.x - 40) and (self.y == brick.y)
         hit_right = (self.x == brick.x + 40) and (self.y == brick.y)
-        return boom and (hit or hit_top or hit_bottom or hit_left or hit_right)
+        hit_top_right = (self.x == brick.x + 40) and (self.y == brick.y + 40)
+        hit_top_left = (self.x == brick.x - 40) and (self.y == brick.y + 40)
+        hit_bottom_right = (self.x == brick.x + 40) and (self.y == brick.y - 40)
+        hit_bottom_left = (self.x == brick.x - 40) and (self.y == brick.y - 40)
+        return boom and (hit or hit_top or hit_bottom or hit_left or hit_right or hit_top_right or hit_top_left or hit_bottom_right or hit_bottom_left)
     
     def set_image(self):  
         self.img.convert()

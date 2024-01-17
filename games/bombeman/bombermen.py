@@ -23,11 +23,11 @@ clock = pygame.time.Clock()
 top_secret.super_secret()
 
 # игрок
-bomber = player.Player(surface)
+bomber = player.Player(surface, 80, 80)
 
 # щит и супер щит
 shieldy = None
-if bomber.carry_shieldy:
+if shield.chance_of_dropping() and not bomber.carry_pickaxe:
     shieldy = shield.Shield(surface, 40, 40) 
     bomber.carry_shieldy = True
 else:
@@ -57,7 +57,7 @@ bricks = laby.fill_with_bricks(surface)
 
 # монстры
 monsters = []
-for i in range(5):
+for i in range(10):
     mons = monster.Monster(surface)
     monsters.append(mons)
 g_mons = monster.GhostMonster(surface)

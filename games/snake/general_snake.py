@@ -5,7 +5,8 @@ import field
 import snake
 import food
 
-FPS = 5
+FPS = 1
+i = 0
 
 pygame.init()
 pygame.display.set_caption('Snake')
@@ -15,11 +16,8 @@ clock = pygame.time.Clock()
 
 
 snaky = snake.Snake(surface, 0, 0)
-foood = food.Food(surface)
 
-running = True
-
-while running:
+while FPS != 1000:
     clock.tick(FPS)
     events = pygame.event.get()
 
@@ -37,6 +35,12 @@ while running:
                 snaky.direction = snake.Direction.up
             elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
                 snaky.direction = snake.Direction.down
+
+    foood = food.Food(surface)
+
+    i += 0.001
+    FPS += i
+    print(FPS, i)
 
     surface.fill((0, 0, 0))
     field.draw(surface)
