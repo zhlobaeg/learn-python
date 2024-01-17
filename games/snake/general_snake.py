@@ -5,6 +5,9 @@ import field
 import snake
 import food
 
+def game_over():
+    tkinter.messagebox.showinfo('game over','вы продали почку')
+
 FPS = 3
 
 pygame.init()
@@ -48,5 +51,9 @@ while running:
     foood.draw()
     snaky.move()
     snaky.draw()
+
+    if snaky.bite_itself():
+        game_over()
+        running = False
 
     pygame.display.update()

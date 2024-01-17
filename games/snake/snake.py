@@ -46,9 +46,15 @@ class Snake:
 
     
     def check_hit(self, food):
-        print(self.x, self.y, '  ', food.x, food.y)
         return (self.x == food.x) and (self.y == food.y)
 
     def grow(self):
         segment = (self.x, self.y)
         self.body.insert(0, segment)
+
+    def  bite_itself(self):
+        for segment in self.body[1:]:
+            (x, y) = segment
+            if self.x == x and self.y == y:
+                return True
+        return False
