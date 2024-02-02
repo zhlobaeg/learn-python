@@ -6,7 +6,7 @@ import platform
 def game_over():
     tkinter.messagebox.showinfo('game over','вы продали почку')
 
-FPS = 50
+FPS = 30
 
 pygame.init()
 pygame.display.set_caption('Falling rocks')
@@ -15,7 +15,7 @@ clock = pygame.time.Clock()
 
 running = True
 
-platform = platform.Platform(surface, 380, 750)
+platf = platform.Platform(surface, 380, 750)
 
 while running:
     clock.tick(FPS)
@@ -28,11 +28,15 @@ while running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_a or event.key == pygame.K_LEFT:
-                platform.step_left()
+                platf.direction = platform.Direction.left
             elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-                platform.step_right()
+                platf.direction = platform.Direction.right
+        if event.type == pygame.KEYUP:
+            platf.direction = None
+
 
     surface.fill((0,0,0))
-    platform.draw()
+    platf.moving()
+    platf.draw()
 
     pygame.display.update()

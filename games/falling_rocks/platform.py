@@ -4,8 +4,6 @@ import enum
 class Direction(enum.Enum):
     left = 1
     right = 2
-    up = 3
-    down = 4
 
 class Platform:
     def __init__(self, surface, x, y):
@@ -15,13 +13,21 @@ class Platform:
         self.prev_x = self.x
         self.prev_y = self.y
         self.color = (72, 128, 64)
-        self.step = 38
+        self.step = 19
         self.width = 76
         self.high = 38
+        self.direction = None
 
     def save_pos(self):
         self.prev_x = self.x
         self.prev_y = self.y
+
+    def moving(self):
+        if self.direction == Direction.left:
+            self.step_left()
+        elif self.direction == Direction.right:
+            self.step_right()
+
     
     def step_left(self):
         if self.x - self.step >= 0: 
