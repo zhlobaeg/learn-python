@@ -41,3 +41,10 @@ class Platform:
 
     def draw(self):
         pygame.draw.rect(self.surface, self.color, (self.x + 1, self.y + 1, self.width, self.high))
+
+
+    def check_hit(self, stone):
+        if self.y >= stone.y and self.y <= (stone.y + stone.high):
+            if self.x <= (stone.x + stone.width) and (self.x + self.width) >= stone.x:
+                return True
+        return False
