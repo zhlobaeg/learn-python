@@ -18,10 +18,23 @@ running = True
 
 platf = platform.Platform(surface, 380, 750)
 stones = []
-for i in range(7):
-    stone = rocks.Rock(surface, 0, 0)
-    stone.random_spawn()
-    stones.append(stone)
+
+difficult = int(input('1- нормальный режим/ 2- сложный режим/ 3- невозможно: '))
+if difficult == 1:
+    for i in range(5):
+        stone = rocks.Rock(surface, 0, 0)
+        stone.random_spawn()
+        stones.append(stone)
+elif difficult == 2:
+    for i in range(10):
+        stone = rocks.Rock(surface, 0, 0)
+        stone.random_spawn()
+        stones.append(stone)
+elif difficult == 3:
+    for i in range(15):
+        stone = rocks.Rock(surface, 0, 0)
+        stone.random_spawn()
+        stones.append(stone)
 
 while running:
     clock.tick(FPS)
@@ -49,7 +62,7 @@ while running:
             stone.step += 0.01
             print(stone.step)
         elif stone.step == 30:
-            tkinter.messagebox.showinfo('gg','вы получили 3 почку')
+            tkinter.messagebox.showinfo('gg','вы получили 3ю почку')
             running = False
 
         stone.move()
