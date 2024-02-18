@@ -12,26 +12,41 @@ class Monster(character.Character):
         self.sec_counter = 0
         self.ghost = False
         self.set_image('./images/monster.png')
+        self.wrong_moves = []
+        self.directions = [1, 2, 3, 4]
+        self.direction = None
 
     def walk(self):
         self.sec_counter += 1
         if self.sec_counter == 50:
             self.sec_counter = 0
 
-            direction = random.randint(1, 4)
+            valid_directions = list(set(self.directions) - set(self.wrong_moves))  
+            print(self.directions)
+            print(self.wrong_moves)
+            print(valid_directions)
+            print('   ')
+            if valid_directions == []:
+                self.wrong_moves = []
+                self.direction = random.choice(self.directions)
+            else:
+                self.direction = random.choice(valid_directions)    
 
-            if direction == 1:
+            if self.direction == 1:
                 self.step_left()
-            elif direction == 2:
+            elif self.direction == 2:
                 self.step_up()
-            elif direction == 3:
+            elif self.direction == 3:
                 self.step_right()
-            elif direction == 4:
-                self.step_down()    
+            elif self.direction == 4:
+                self.step_down() 
+            self.wrong_moves = []   
 
     def step_back(self):
         super().step_back()
         self.sec_counter = 40
+        self.wrong_moves.append(self.direction)
+        self.walk()       
 
 class GhostMonster(Monster):
     def __init__(self, surface):
