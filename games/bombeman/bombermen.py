@@ -1,7 +1,8 @@
 import pygame
 import tkinter
-from tkinter import messagebox
 import random
+from tkinter import *
+from tkinter import ttk
 import player
 import bomb
 import labyrinth
@@ -28,7 +29,7 @@ bomber = player.Player(surface, 80, 80)
 # щит и супер щит
 shieldy = None
 if shield.chance_of_dropping() and not bomber.carry_pickaxe:
-    shs
+
     bomber.carry_shieldy = False
 
 # кирка
@@ -76,9 +77,16 @@ for brick in bricks:
 
 bricks = list(set(bricks) - set(exploded_bricks))
 
+#смерть
 def game_over():
-    tkinter.messagebox.showinfo('ласт кристмас','сдох)')
-
+    print('game over')
+    window = Tk()
+    window.title("game_over")
+    window.geometry("250x200")
+    label = ttk.Label(window, text="sus amogus was an imposter")
+    label.pack(anchor=CENTER, expand = 2)
+    close_button = ttk.Button(window, text="close sus amogus", command=quit)
+    close_button.pack(anchor="center", expand = 3)
 
 running = True
 
@@ -226,7 +234,7 @@ while running:
 
     # смерть игрока
     for mons in monsters:
-        if bomber.check_hit(mons) and mons != mons1 and not shieldy.protection():
+        if bomber.check_hit(mons) and mons != mons1 and ((not shieldy) or (shieldy and not shieldy.protection())):
             running = False
             game_over()
 
@@ -234,6 +242,3 @@ while running:
         if bomber.check_hit(b_hole):
             running = False
             game_over()
-
-
-pygame.quit()
