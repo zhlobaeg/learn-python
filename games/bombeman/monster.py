@@ -22,10 +22,6 @@ class Monster(character.Character):
             self.sec_counter = 0
 
             valid_directions = list(set(self.directions) - set(self.wrong_moves))  
-            print(self.directions)
-            print(self.wrong_moves)
-            print(valid_directions)
-            print('   ')
             if valid_directions == []:
                 self.wrong_moves = []
                 self.direction = random.choice(self.directions)
