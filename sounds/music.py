@@ -16,8 +16,6 @@ sounds = [
     pg.mixer.Sound('./sounds/processed-mixed-drums-weird-loop_128bpm_E_minor.wav')
 ]
 
-
-
 def play_sound(sound_index):
     sounds[sound_index].play()
 
