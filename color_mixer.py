@@ -3,7 +3,7 @@ import random
 
 root = Tk()
 root.title('rgb_colors')
-root.geometry("600x500")
+root.geometry("550x410")
 root.config(bg='black')
 
 canvas = Canvas(root, width=200, height=200)
